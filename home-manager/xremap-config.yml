@@ -1,0 +1,24 @@
+# sudo xremap .config/xremap/config.yml
+# /dev/input/event24: GM610 BT 5.0 Keyboard
+# /dev/input/event4 : SONiX USB DEVICE Keyboard
+modmap:
+  - name: CapsLock to RightCtrl/Esc
+    remap:
+      CapsLock:
+        held: Ctrl_R
+        alone: Esc
+        alone_timeout: 500
+
+keymap:
+  - name: RightCtrl+hjkl to Arrows
+    remap:
+      Ctrl_R-h: Left
+      Ctrl_R-l: Right
+      Ctrl_R-j: Down
+      Ctrl_R-k: Up
+  - name: RightCtrl + Esc to "~ and `"
+    remap:
+      Ctrl_R-Esc: Grave
+      Ctrl_R-S-Esc: S-Grave
+      Ctrl_R-Grave: Grave
+      Ctrl_R-S-Grave: S-Grave
