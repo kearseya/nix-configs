@@ -19,8 +19,13 @@ in {
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = 1;
     NIXOS_OZONE_WL = 1;
-    XCURSOR_THEME = "breeze";
+    XCURSOR_THEME = "Bibita-Modern-Amber";
     XCURSOR_SIZE = 24;
+    LIBVA_DRIVER_NAME = "nvidia";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    WLR_RENDERER_ALLOW_SOFTWARE = "1";
+    WLR_RENDER_DRM_DEVICE = "/dev/dri/card1";
   };
 
   hardware = {

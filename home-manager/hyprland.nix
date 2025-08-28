@@ -9,10 +9,11 @@
   # configuration
   wayland.windowManager.hyprland.settings = {
     # can be made with if but
+    cursor.no_hardware_cursors = true;
     monitor = [
-      "DP-1, 2560x1440, 0x0, 1"
-      "HDMI-A-1, 1920x1080, 2560x0, 1"
-      "HDMI-A-2, 1920x1080, 4480x0, 1"
+      "DP-1, 2560x1440@144, 0x0, 1"
+      "HDMI-A-1, 1920x1080@120, 2560x0, 1"
+      "HDMI-A-2, 1920x1080@60, 4480x0, 1"
     ];
     workspace = [
       "1,monitor:DP-1"
@@ -183,12 +184,13 @@
       "$mod, mouse_down, workspace, e+1"
       "$mod, mouse_up, workspace, e-1"
 
-      # move and resize with mouse
-      "$mod, mouse:272, movewindow"
-      # "$mod, mouse:273, resizewindow"
-
       "ALT, TAB, cyclenext"
       "ALT, TAB, bringactivetotop"
+    ];
+    bindm = [
+      # move and resize with mouse
+      "$mod, mouse:272, movewindow"
+      "$mod, mouse:273, resizewindow"
     ];
 
     windowrule = [

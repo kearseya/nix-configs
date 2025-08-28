@@ -1,14 +1,17 @@
-{ config, pkgs, ... }:
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   shell-aliases = {
     ".." = "cd ..";
     vim = "nvim";
     nr = "sudo nixos-rebuild switch --flake .#nixos-desktop";
     hr = "home-manager switch --flake .";
+    ns = "nix-shell";
     "cdd" = "cd ~/.dotfiles";
   };
-in
-{
+in {
   # Shell configurations (shell-aliases at top)
   programs.bash = {
     enable = true;

@@ -18,6 +18,29 @@
   #     vnoremap <C-C> "+y
   #   '';
   # };
+
+  # programs.neovim = {
+  #   enable = true;
+  #
+  #   # Ensure plugins actually get loaded:
+  #   extraLuaConfig = ""; # A blank string suffices.
+  #
+  #   plugins = with pkgs.vimPlugins; [
+  #     {
+  #       # plugin = sphamba-smear-cursor-nvim;
+  #       pkgs.vimUtils.buildVimPlugin {
+  #         src = pkgs.fetchFromGitHub {
+  #           owner = "sphamba";
+  #           repo = "smear-cursor.nvim";
+  #         };
+  #       }
+  #       type = "lua"; # Ensures config is treated as Lua code
+  #       config = ''
+  #         require("smear").setup()
+  #       '';
+  #     }
+  #   ];
+  # };
   programs.nvf = {
     enable = true;
     settings = {
