@@ -2,51 +2,34 @@
   self,
   pkgs,
   lib,
+  environment,
   ...
 }: {
-  # programs.vim = {
-  #   enable = true;
-  #   extraConfig = ''
-  #     set tabstop=2
-  #     set noexpandtab
-  #     set shiftwidth=2
-  #     set number relativenumber
-  #     set autoindent
-  #     set tabwidth=2
-  #     set mouse=a
-  #     set clipboard=unnamedplus
-  #     vnoremap <C-C> "+y
-  #   '';
-  # };
+  # home.file."~/.config/nvim/smear.lua".text = ''
+  #   -- Add smear-cursor.nvim to Lua package path
+  #   for _, path in ipairs(vim.api.nvim_list_runtime_paths()) do
+  #     local smear_path = path .. "/lua"
+  #     package.path = package.path .. ";" .. smear_path .. "/?.lua;" .. smear_path .. "/?/init.lua"
+  #   end
+  #
+  #   -- Load and setup the plugin
+  #   local ok, smear = pcall(require, "smear")
+  #   if ok then
+  #     smear.setup()
+  #   end
+  # '';
 
-  # programs.neovim = {
-  #   enable = true;
-  #
-  #   # Ensure plugins actually get loaded:
-  #   extraLuaConfig = ""; # A blank string suffices.
-  #
-  #   plugins = with pkgs.vimPlugins; [
-  #     {
-  #       # plugin = sphamba-smear-cursor-nvim;
-  #       pkgs.vimUtils.buildVimPlugin {
-  #         src = pkgs.fetchFromGitHub {
-  #           owner = "sphamba";
-  #           repo = "smear-cursor.nvim";
-  #         };
-  #       }
-  #       type = "lua"; # Ensures config is treated as Lua code
-  #       config = ''
-  #         require("smear").setup()
-  #       '';
-  #     }
-  #   ];
-  # };
   programs.nvf = {
     enable = true;
     settings = {
       vim = {
         viAlias = false;
         vimAlias = true;
+        # additionalRuntimePaths = ["~/.config/nvim"];
+        options = {
+          tabstop = 2;
+          shiftwidth = 2;
+        };
 
         tabline.nvimBufferline.enable = true;
 
@@ -139,6 +122,49 @@
         # most plugins
         telescope.enable = true;
         comments.comment-nvim.enable = true;
+
+        startPlugins = [
+          # pkgs.vimPlugins.mini-indentscope
+          (pkgs.vimUtils.buildVimPlugin {
+            pname = "smear-cursor.vim";
+            version = "0.5.1";
+            src = pkgs.fetchFromGitHub {
+              owner = "sphamba";
+              repo = "smear-cursor.nvim";
+              rev = "v0.5.1";
+              sha256 = "sha256-oXO09JvN+mJ2ChsKxSASe6E33FXSINRduLZmTJwrntg=";
+            };
+            optional = false;
+          })
+          (pkgs.vimUtils.buildVimPlugin {
+            pname = "indentmini.nvim";
+            version = "main";
+            src = pkgs.fetchFromGitHub {
+              owner = "nvimdev";
+              repo = "indentmini.nvim";
+              rev = "main";
+              sha256 = "sha256-iMQn9eJuwThatTg9aTKhgHQaBc1NV4h/6gGt+fhZG9k=";
+            };
+            optional = false;
+          })
+        ];
+        luaConfigRC.myconfig =
+          /*
+          lua
+          */
+          ''
+            require('smear_cursor').setup({
+              stiffness = 0.8,
+              trailing_stiffness =  0.5,
+              distance_stop_animating = 0.5,
+            })
+
+            require("indentmini").setup({
+                minlevel=1,
+                only_current = false,
+              })
+            vim.cmd.highlight('IndentLine guifg=#7c6f64')
+          '';
       };
     };
   };

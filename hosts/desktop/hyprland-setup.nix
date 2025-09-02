@@ -33,6 +33,10 @@ in {
     nvidia.modesetting.enable = true;
   };
 
+  environment.variables = {
+    HYPRSHOT_DIR = "/home/alex/Pictures/Screenshots";
+  };
+
   environment.systemPackages = with pkgs; [
     waybar
     dunst
@@ -42,13 +46,21 @@ in {
     hypridle
     hyprlock
     hyprcursor
+    hyprshot
     # pkgs.eww
+    # xdg-desktop-portal
+    # xdg-desktop-portal-wlr
+    # xdg-desktop-portal-gtk
   ];
 
-  # xdg.portal = true;
-  # xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-hyprland];
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      # pkgs.xdg-desktop-portal-gtk
+    ];
+  };
 
   # sound.enable = true;
   security.rtkit.enable = true;

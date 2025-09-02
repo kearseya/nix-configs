@@ -186,6 +186,10 @@
 
       "ALT, TAB, cyclenext"
       "ALT, TAB, bringactivetotop"
+
+      "$mod, PRINT, exec, hyprshot -m window"
+      ", PRINT, exec, hyprshot -m output"
+      "$mod SHIFT, PRINT, exec, hyprshot -m region"
     ];
     bindm = [
       # move and resize with mouse
