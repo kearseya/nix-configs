@@ -66,3 +66,17 @@ tooltip {}
 #custom-weather {}
 
 #custom-endright {}
+
+#custom-caffeine {
+  font-family: "mononoki Nerd Font";
+  font-size: 14px;
+  padding: 0 8px;
+}
+
+#custom-caffeine.on {
+  color: #f9a825; /* bright amber - caffeinated/active */
+}
+#custom-caffeine.off {
+  color: #6c6c6c; /* dimmed grey - idle allowed */
+  opacity: 0.6;
+}

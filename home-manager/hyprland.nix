@@ -123,8 +123,8 @@
       "$mod, T, exec, $terminal"
       "$mod, C, killactive"
       "$mod, L, exec, hyprlock"
-      "$mod, Q, exit"
-      "$mod, B, exec, zen"
+      # "$mod, Q, exit"
+      "$mod, B, exec, flatpak-zen"
       "$mod, V, togglefloating"
       "$mod, F, fullscreen"
       "$mod, R, exec, $menu"
@@ -196,6 +196,10 @@
       "$mod, mouse:272, movewindow"
       "$mod, mouse:273, resizewindow"
     ];
+    binde = [
+      ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"
+      ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"
+    ];
 
     windowrule = [
       "suppressevent, maximize, class:.*"
@@ -218,6 +222,10 @@
         lock_cmd = "hyprlock";
       };
       listener = [
+        {
+          timeout = 899;
+          on-timeout = "notify-send Idle -u critical";
+        }
         {
           timeout = 900;
           on-timeout = "hyprlock";

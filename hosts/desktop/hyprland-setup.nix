@@ -8,7 +8,7 @@
   Mod = "SUPER";
   terminal = "alacritty";
   file_manager = "dolphin";
-  browser = "zen";
+  # browser = "zen";
 in {
   programs.hyprland = {
     enable = true;
@@ -51,6 +51,7 @@ in {
     # xdg-desktop-portal
     # xdg-desktop-portal-wlr
     # xdg-desktop-portal-gtk
+    xdg-user-dirs
   ];
 
   xdg.portal = {

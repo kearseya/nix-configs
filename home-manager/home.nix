@@ -18,6 +18,7 @@
     ./wallpaper.nix
     ./alacritty.nix
     ./nvf-vim.nix
+    ./dunst.nix
   ];
   # enable hyprland to be configured
   # programs.hyprland.enable = true;
@@ -50,6 +51,13 @@
     xremap
     gcc
     scons
+    (python3.withPackages
+      (python-pkgs: [
+        python-pkgs.matplotlib
+        python-pkgs.numpy
+        python-pkgs.pandas
+        python-pkgs.requests
+      ]))
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -66,10 +74,17 @@
 
     # Programs
     # spotify
+    chromium
+    libreoffice
     gimp
     nautilus
     filezilla
     godot
+    audacity
+    vlc
+    musescore
+
+    hyprsunset
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -85,7 +100,18 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+    ".local/bin/flatpak-zen" = {
+      text = ''
+        #!/bin/sh
+        flatpak run app.zen_browser.zen
+      '';
+      executable = true;
+    };
   };
+
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
@@ -105,8 +131,12 @@
   #
   home.sessionVariables = {
     EDITOR = "nvim";
+    XDG_DATA_DIRS = "$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share";
+    # XDG_DATA_DIRS = "${config.home.sessionVariables.XDG_DATA_DIRS or ""}:/var/lib/flatpak/exports/share:${config.home.homeDirectory}/.local/share/flatpak/exports/share";
   };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  # programs.zen-browser.enable = true;
 }

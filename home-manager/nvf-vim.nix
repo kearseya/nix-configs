@@ -143,7 +143,8 @@
               owner = "nvimdev";
               repo = "indentmini.nvim";
               rev = "main";
-              sha256 = "sha256-iMQn9eJuwThatTg9aTKhgHQaBc1NV4h/6gGt+fhZG9k=";
+              # sha256 = "sha256-iMQn9eJuwThatTg9aTKhgHQaBc1NV4h/6gGt+fhZG9k=";
+              sha256 = "sha256-YDO48kLOkzbJ9HDiQ0rQ/bbvyD8FQ9iNfSl1V0naUAs=";
             };
             optional = false;
           })

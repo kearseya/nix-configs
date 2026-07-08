@@ -12,28 +12,33 @@
       # backupFileExtention = "backup";
     };
 
+    # # Secure boot
+    # lanzaboote = {
+    #   url = "github:nix-community/lanzaboote/v1.0.0";
+    # };
+
     # Themeing
     nix-colors = {
       url = "github:misterio77/nix-colors";
       # nix-colors.inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin = {
-      url = "github:catppuccin/nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # catppuccin = {
+    #   url = "github:catppuccin/nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     # stylix = {
     #   url = "github:/danth/stylix/release-25.05";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 
     # Programs
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
-    };
+    # zen-browser = {
+    #   url = "github:0xc000022070/zen-browser-flake";
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs";
+    #     home-manager.follows = "home-manager";
+    #   };
+    # };
 
     #neovim = {
     #	url = "github:nix-community/neovim-nightly-overlay";
@@ -51,8 +56,8 @@
     nixpkgs,
     home-manager,
     nix-colors,
-    catppuccin,
-    zen-browser,
+    # catppuccin,
+    # zen-browser,
     nvf,
     ...
   } @ inputs: let
@@ -71,6 +76,8 @@
         modules = [
           hosts/desktop/configuration.nix
           # inputs.stylix.nixosModules.stylix
+          # (import "${nixpkgs}/nixos/modules/system/boot/lanzaboote.nix")
+          # inputs.lanzaboote.nixosModules.lanzaboote
         ];
       };
     };
@@ -85,6 +92,7 @@
         modules = [
           home-manager/home.nix
           inputs.nvf.homeManagerModules.default
+          # inputs.zen-browser.homeManagerModules.default
           # inputs.stylix.homeModules.stylix
         ];
       };

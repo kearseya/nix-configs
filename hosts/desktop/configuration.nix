@@ -19,21 +19,28 @@
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
-    grub.useOSProber = true;
+    # grub.useOSProber = true;
     # grub.enable = true;
     # grub.copyKernels = true;
     # grub.efiInstallAsRemovable = true;
     # grub.efiSupport = true;
     # grub.devices = ["nodev"];
-    grub.extraEntries = ''
-      menuentry "Reboot" {
-        reboot
-      }
-      menuentry "PowerOff" {
-        halt
-      }
-    '';
+    # grub.extraEntries = ''
+    #   menuentry "Reboot" {
+    #     reboot
+    #   }
+    #   menuentry "PowerOff" {
+    #     halt
+    #   }
+    # '';
   };
+
+  # Failed secure boot
+  # boot.lanzaboote = {
+  #   enable = true;
+  #   # pkiBundle = "/var/lib/sbctl";
+  # };
+  # services.sbctl.enable = true;
 
   # Login manager
   services.xserver.enable = true;
@@ -177,8 +184,8 @@
     kitty
     alacritty
     firefox
+    # inputs.zen-browser.packages."${system}".default
     kdePackages.dolphin
-    inputs.zen-browser.packages."${system}".default
     pavucontrol
     (lutris.override {
       extraPkgs = pkgs: [
@@ -193,6 +200,11 @@
     gruvbox-gtk-theme
     adwaita-qt
     nwg-look
+    # podman
+    dive
+    podman-tui
+    docker-compose
+    sbctl
   ];
 
   # user apps
@@ -221,7 +233,8 @@
     discord-ptb
     spotify
     godot
-    runelite
+    flatpak
+    gnome-software
     mangohud
   ];
 
@@ -264,6 +277,22 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # Enable common container config files in /etc/containers
+  virtualisation.containers.enable = true;
+  virtualisation = {
+    podman = {
+      enable = true;
+
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      dockerCompat = true;
+
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
+
+  services.flatpak.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
