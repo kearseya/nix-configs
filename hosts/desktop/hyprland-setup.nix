@@ -14,6 +14,7 @@ in {
     enable = true;
     # nvidiaPatches = true; # old not used
     xwayland.enable = true;
+    withUWSM = false;
   };
 
   environment.sessionVariables = {
@@ -42,7 +43,7 @@ in {
     dunst
     libnotify
     hyprpaper
-    rofi-wayland
+    rofi
     hypridle
     hyprlock
     hyprcursor

@@ -93,7 +93,7 @@
     };
 
     dwindle = {
-      pseudotile = "true";
+      # pseudotile = "true";
       preserve_split = "true";
     };
 
@@ -115,9 +115,9 @@
       };
     };
 
-    gestures = {
-      workspace_swipe = "true";
-    };
+    # gestures = {
+    #   workspace_swipe = "true";
+    # };
 
     bind = [
       "$mod, T, exec, $terminal"
@@ -129,7 +129,7 @@
       "$mod, F, fullscreen"
       "$mod, R, exec, $menu"
       "$mod, P, pseudo, # dwindlw"
-      "$mod, O, togglesplit"
+      # "$mod, O, togglesplit"
 
       # focus switching with vim doubles
       "$mod, left, movefocus, l"
@@ -201,10 +201,10 @@
       ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"
     ];
 
-    windowrule = [
-      "suppressevent, maximize, class:.*"
-      "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
-    ];
+    # windowrule = [
+    #   "suppressevent, maximize, class:.*"
+    #   "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+    # ];
     exec-once = [
       "waybar"
       # "xremap --device /dev/input/event24 ./xremap-config.yml"

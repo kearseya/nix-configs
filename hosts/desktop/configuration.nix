@@ -7,7 +7,9 @@
   inputs,
   stdenv,
   ...
-}: {
+}: let
+  sddmTheme = import ./sddm-theme.nix {inherit pkgs;};
+in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -18,6 +20,7 @@
   # Bootloader.
   boot.loader = {
     systemd-boot.enable = true;
+    systemd-boot.configurationLimit = 3;
     efi.canTouchEfiVariables = true;
     # grub.useOSProber = true;
     # grub.enable = true;
@@ -44,8 +47,11 @@
 
   # Login manager
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.theme = "${import ./sddm-theme.nix {inherit pkgs;}}";
+  services.displayManager.sddm = {
+    enable = true;
+    theme = "sddm-astronaut-theme";
+    extraPackages = [sddmTheme];
+  };
   #services.xserver = {
   #  enable = true;
   #  displayManager.sddm = {
@@ -189,12 +195,13 @@
     pavucontrol
     (lutris.override {
       extraPkgs = pkgs: [
-        wineWowPackages.staging
+        wineWow64Packages.staging
         winetricks
-        wineWowPackages.waylandFull
+        wineWow64Packages.waylandFull
       ];
     })
     # themes
+    sddmTheme
     libsForQt5.qt5.qtquickcontrols2
     libsForQt5.qt5.qtgraphicaleffects
     gruvbox-gtk-theme
@@ -212,10 +219,10 @@
     steam = pkgs.steam.override {
       extraPkgs = pkgs:
         with pkgs; [
-          xorg.libXcursor
-          xorg.libXi
-          xorg.libXinerama
-          xorg.libXScrnSaver
+          libxcursor
+          libxi
+          libxinerama
+          libxscrnsaver
           libpng
           libpulseaudio
           libvorbis
@@ -243,7 +250,7 @@
   fonts = {
     packages = with pkgs; [
       nerd-fonts.mononoki
-      ubuntu_font_family
+      ubuntu-classic
       liberation_ttf
       # nerd-fonts.Cartograph-CF
     ];

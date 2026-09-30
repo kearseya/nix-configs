@@ -17,12 +17,16 @@
     ./waybar.nix
     ./wallpaper.nix
     ./alacritty.nix
-    ./nvf-vim.nix
+    # ./nvf-vim.nix
+    ./neovim.nix
     ./dunst.nix
   ];
   # enable hyprland to be configured
   # programs.hyprland.enable = true;
   wayland.windowManager.hyprland.enable = true;
+
+  gtk.gtk4.theme = config.gtk.theme;
+  wayland.windowManager.hyprland.configType = "hyprlang";
 
   colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
 
@@ -42,7 +46,7 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "25.05"; # Please read the comment before changing.
+  home.stateVersion = "26.05"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -50,6 +54,7 @@
     # tools
     xremap
     gcc
+    bear # for compile_commands.json (bear -- make)
     scons
     (python3.withPackages
       (python-pkgs: [
@@ -58,6 +63,7 @@
         python-pkgs.pandas
         python-pkgs.requests
       ]))
+    appimage-run
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -85,6 +91,8 @@
     musescore
 
     hyprsunset
+    wl-clipboard
+    bluez-tools
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

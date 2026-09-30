@@ -15,6 +15,8 @@
     sn = "shutdown now";
     dim = "hyprsunset -t 4500 --gamma 50.0";
     py = "python3";
+    clock = "timer -n time 0";
+    fixhypr = "hyprctl --instance 0 'keyword misc:allow_session_lock_restore 1'; hyprctl --instance 0 'dispatch exec hyprlock'";
   };
 in {
   # Shell configurations (shell-aliases at top)
